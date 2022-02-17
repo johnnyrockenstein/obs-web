@@ -50,11 +50,11 @@
     // Listen for Keyboard Input
     document.addEventListener('keydown', (event) => {
       switch(event.key) {
-        case '1':
-         setSceneCustom('RED')
-          break;
         case '2':
-          setSceneCustom('GREEN')
+         setSceneCustom('CENSORED')
+          break;
+        case '1':
+          setSceneCustom('live')
           break;
         default:
           break;
@@ -440,16 +440,20 @@
           {#each chunk as sc}
             <div class="tile is-parent">
               <!-- svelte-ignore a11y-missing-attribute -->
+              
               {#if currentScene == sc.name}
-                <a class="tile is-child is-primary notification">
+             
+                  <a class="tile is-child is-primary notification { sc.name == 'CENSORED' ? 'is-danger' : 'is-success' }">
                   <p class="title has-text-centered is-size-6-mobile">{sc.name}</p>
                 </a>
-              {:else if currentPreviewScene == sc.name}
+
+                {:else if currentPreviewScene == sc.name}
                 <a on:click={setScene} class="tile is-child is-warning notification">
                   <p class="title has-text-centered is-size-6-mobile">{sc.name}</p>
                 </a>
+
               {:else}
-                <a on:click={isStudioMode ? setPreview : setScene} class="tile is-child is-info notification">
+                <a on:click={isStudioMode ? setPreview : setScene} class="tile is-child notification">
                   <p class="title has-text-centered is-size-6-mobile">{sc.name}</p>
                 </a>
               {/if}
