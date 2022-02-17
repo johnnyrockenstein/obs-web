@@ -47,6 +47,23 @@
       isFullScreen = document.msFullscreenElement;
     });
 
+    // Listen for Keyboard Input
+    document.addEventListener('keydown', (event) => {
+      switch(event.key) {
+        case '1':
+         setSceneCustom('RED')
+          break;
+        case '2':
+          setSceneCustom('GREEN')
+          break;
+        default:
+          break;
+      }
+  });
+
+  // Connect Automatically
+  connect();
+  
     // Hamburger menu
     const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
     if ($navbarBurgers.length > 0) {
@@ -126,6 +143,10 @@
     await sendCommand('SetCurrentScene', { 'scene-name': e.currentTarget.textContent });
   }
 
+  async function setSceneCustom(e) {
+    await sendCommand('SetCurrentScene', { 'scene-name': e });
+  }
+
   async function transitionScene(e) {
     await sendCommand('TransitionToProgram');
   }
@@ -201,7 +222,7 @@
   }
 
   async function connect() {
-    host = host || 'localhost:4444';
+    host = host || '10.0.0.240:4444';
     let secure = location.protocol === 'https:' || host.endsWith(':443');
     if (host.indexOf('://') !== -1) {
       let url = new URL(host);
@@ -470,7 +491,7 @@
 
       <div class="field is-grouped">
         <p class="control is-expanded">
-          <input id="host" on:keyup={hostkey} bind:value={host} class="input" type="text" placeholder="localhost:4444" />
+          <input id="host" on:keyup={hostkey} bind:value={host} class="input" type="text" placeholder="10.0.0.240:4444" />
         </p>
         <p class="control">
           <button on:click={connect} class="button is-success">Connect</button>
