@@ -4,7 +4,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public --host --port 5555 && chromium-browser --kiosk --app=localhost:5555 "
+    "start": "sirv public --host --port 5555"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.0.2",
